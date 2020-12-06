@@ -5,8 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Diary"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        WindowStartupLocation="CenterScreen"
+        Title="Dziennik Ucznia" Height="450" Width="800">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <Button Content="Dodaj" Height="30" Width="100" Margin="5"/>
+            <Button Content="Edytuj" Height="30" Width="100" Margin="5" />
+            <ComboBox  Height="30" Width="150" Margin="5"/>
+            <Button Content="Odśwież" Height="30" Width="100" Margin="5"/>
+        </StackPanel>
+        <DataGrid Grid.Row="1" Margin="5"/>
+
     </Grid>
 </Window>
