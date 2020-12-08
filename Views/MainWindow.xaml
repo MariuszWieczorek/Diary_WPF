@@ -7,7 +7,7 @@
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="Dziennik Ucznia" Height="450" Width="800">
+        Title="Dziennik Ucznia" Height="500" Width="1000">
 
    
     <Grid>
@@ -17,23 +17,46 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal">
             <Button Content="Dodaj" Height="30" Width="100" Margin="5"/>
-            <!--
-            <Button Height="30" Width="100" Margin="5">
-                <Button.Content>
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="Images/add-512.png"/>
-                        <Label Content="Dodaj"  Margin="10,0,0,0"/>
-                    </StackPanel>
-                </Button.Content>
-            </Button>
-             -->   
-            
             <Button Content="Edytuj" Height="30" Width="100" Margin="5" />
-            <ComboBox  Height="30" Width="150" Margin="5"/>
+            <ComboBox
+                Height="30"
+                Width="150"
+                Margin="5"
+                ItemsSource="{Binding Groups}"
+                SelectedItem="{Binding SelectedGroupId}"
+                DisplayMemberPath="Name"
+                SelectedValuePath="Id"
+            />
+            
             <Button  Command ="{Binding RefreshStudentsCommand}" Content="Odśwież" Height="30" Width="100" Margin="5"/>
             <!-- Style ="{StaticResource ButtonRefreshStyle}" -->
+            
         </StackPanel>
-        <DataGrid Grid.Row="1" Margin="5"/>
+        <DataGrid
+            Grid.Row="1"
+            Margin="5"
+            ItemsSource ="{Binding Students}" 
+            SelectedItem="{Binding SelectedStudents}"
+            CanUserAddRows="False"
+            IsReadOnly="True"
+            SelectionMode="Single"
+            AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Id}" Visibility="Hidden"/>
+                <DataGridTextColumn Binding="{Binding FirstName}" Header="Imię"/>
+                <DataGridTextColumn Binding="{Binding LastName}" Header="Nazwisko"/>
+                <DataGridTextColumn Binding="{Binding Comments}" Header="Uwagi"/>
+                <DataGridTextColumn Binding="{Binding Math}" Header="Matematyka"/>
+                <DataGridTextColumn Binding="{Binding Technology}" Header="Technologia"/>
+                <DataGridTextColumn Binding="{Binding Physisc}" Header="Fizyka"/>
+                <DataGridTextColumn Binding="{Binding PolishLang}" Header="Język Polski" />
+                <DataGridTextColumn Binding="{Binding ForeignLang}" Header="Język Obcy" />
+                <DataGridCheckBoxColumn Binding="{Binding Activities}" Header="Act" />
+                <DataGridTextColumn Binding="{Binding Group.Name}" Header="Grupa"/>
+
+            </DataGrid.Columns>   
+        </DataGrid>
+         
 
     </Grid>
 </mah:MetroWindow>
