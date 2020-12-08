@@ -1,5 +1,8 @@
 ﻿using Diary.Commands;
 using Diary.Models;
+using Diary.Views;
+using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,11 +18,18 @@ namespace Diary.ViewModels
     {
 
         public ICommand RefreshStudentsCommand { get; set; }
+        public ICommand AddStudentsCommand { get; set; }
+        public ICommand EditStudentsCommand { get; set; }
+        public ICommand DeleteStudentsCommand { get; set; }
 
         private Student _selectedStudent;
         public Student SelectedStudent
         {
-            get { return _selectedStudent; }
+            get 
+            {
+              
+               return _selectedStudent;
+            }
             set
             { 
                 _selectedStudent = value;
@@ -68,10 +78,12 @@ namespace Diary.ViewModels
 
         public MainWindowViewModel()
         {
-            RefreshStudentsCommand = new RelayCommand(RefreshStudents, CanRefreshStudents);
-
-            PopulateStudents();
-            PopulateGroups();
+            RefreshStudentsCommand = new RelayCommand(RefreshStudents);
+            AddStudentsCommand = new RelayCommand(AddEditStudents);
+            EditStudentsCommand = new RelayCommand(AddEditStudents, CanEditDeleteStudents);
+            DeleteStudentsCommand = new AsyncRelayCommand(DeleteStudents, CanEditDeleteStudents);
+             
+            RefreshDiary();
 
         }
 
@@ -127,15 +139,63 @@ namespace Diary.ViewModels
             SelectedGroupId = 0;
         }
 
-            private bool CanRefreshStudents(object obj)
+        private void RefreshDiary()
         {
-            return true; // zawsze będzie możliwość kliknięcia tego przycisku
+            PopulateStudents();
+            PopulateGroups();
         }
 
+
+  
         private void RefreshStudents(object obj)
         {
-           
+            RefreshDiary();
         }
+
+    
+
+ 
+        private void AddEditStudents(object obj)
+        {
+            // nie jest to dobre rozwiązanie
+            // Powinno się zastosować Dependency Injection
+            // Utrudnia to stosowanie testów jednostkowych
+            var addEditStudentWindow = new AddEditStudentView(obj as Student);
+            // Subskrybujemy zdarzenie closed
+            addEditStudentWindow.Closed += AddEditStudentWindow_Closed;
+            addEditStudentWindow.ShowDialog();
+            addEditStudentWindow.Closed -= AddEditStudentWindow_Closed;
+        }
+
+        private void AddEditStudentWindow_Closed(object sender, EventArgs e)
+        {
+            RefreshDiary();
+        }
+
+        private bool CanEditDeleteStudents(object obj)
+        {
+            return SelectedStudent != null;
+        }
+
+        private async Task DeleteStudents(object obj)
+        {
+            var metroWindow = Application.Current.MainWindow as MetroWindow;
+            
+            var dialog = 
+                await metroWindow.ShowMessageAsync("Usuwanie ucznia",
+                $"Czy na pewno chcesz usunąć ucznia {SelectedStudent.FirstName} {SelectedStudent.LastName}",
+                MessageDialogStyle.AffirmativeAndNegative);
+
+            if (dialog != MessageDialogResult.Affirmative)
+            {
+                return;
+            }
+
+            // TODO : usuwanie z bazy
+
+            RefreshDiary();
+        }
+
 
     }
 }

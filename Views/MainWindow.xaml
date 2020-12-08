@@ -16,27 +16,60 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal">
-            <Button Content="Dodaj" Height="30" Width="100" Margin="5"/>
-            <Button Content="Edytuj" Height="30" Width="100" Margin="5" />
+        
+            <Button
+                Command ="{Binding AddStudentsCommand}"
+                Content="Dodaj"
+                Height="30"
+                Width="100"
+                Margin="5"
+             />
+            
+            <Button 
+                Command ="{Binding EditStudentsCommand}"
+                CommandParameter="{Binding SelectedStudent}"
+                Content="Edytuj" 
+                Height="30" 
+                Width="100" 
+                Margin="5" 
+            />
+
+            <Button 
+                Command ="{Binding DeleteStudentsCommand}"
+                CommandParameter="{Binding SelectedStudent}"
+                Content="Usuń" 
+                Height="30" 
+                Width="100" 
+                Margin="5" 
+            />
+            
             <ComboBox
                 Height="30"
                 Width="150"
                 Margin="5"
                 ItemsSource="{Binding Groups}"
-                SelectedItem="{Binding SelectedGroupId}"
+                SelectedValue="{Binding SelectedGroupId}"
                 DisplayMemberPath="Name"
                 SelectedValuePath="Id"
             />
             
-            <Button  Command ="{Binding RefreshStudentsCommand}" Content="Odśwież" Height="30" Width="100" Margin="5"/>
+            <Button  
+                Command ="{Binding RefreshStudentsCommand}"
+                CommandParameter="{Binding SelectedStudent}"
+                Content="Odśwież" 
+                Height="30" 
+                Width="100"
+                Margin="5"
+             />
             <!-- Style ="{StaticResource ButtonRefreshStyle}" -->
             
         </StackPanel>
+        
         <DataGrid
             Grid.Row="1"
             Margin="5"
             ItemsSource ="{Binding Students}" 
-            SelectedItem="{Binding SelectedStudents}"
+            SelectedItem="{Binding SelectedStudent}"
             CanUserAddRows="False"
             IsReadOnly="True"
             SelectionMode="Single"
@@ -51,7 +84,7 @@
                 <DataGridTextColumn Binding="{Binding Physisc}" Header="Fizyka"/>
                 <DataGridTextColumn Binding="{Binding PolishLang}" Header="Język Polski" />
                 <DataGridTextColumn Binding="{Binding ForeignLang}" Header="Język Obcy" />
-                <DataGridCheckBoxColumn Binding="{Binding Activities}" Header="Act" />
+                <DataGridCheckBoxColumn Binding="{Binding Activities}" Header="Dodatkowe" />
                 <DataGridTextColumn Binding="{Binding Group.Name}" Header="Grupa"/>
 
             </DataGrid.Columns>   
