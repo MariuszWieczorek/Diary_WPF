@@ -82,7 +82,9 @@ namespace Diary.ViewModels
             AddStudentsCommand = new RelayCommand(AddEditStudents);
             EditStudentsCommand = new RelayCommand(AddEditStudents, CanEditDeleteStudents);
             DeleteStudentsCommand = new AsyncRelayCommand(DeleteStudents, CanEditDeleteStudents);
-             
+
+            // throw new Exception("błędzik");
+
             RefreshDiary();
 
         }
