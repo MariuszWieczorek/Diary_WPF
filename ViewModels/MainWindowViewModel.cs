@@ -1,5 +1,6 @@
 ﻿using Diary.Commands;
 using Diary.Models;
+using Diary.Models.Wrappers;
 using Diary.Views;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
@@ -22,8 +23,8 @@ namespace Diary.ViewModels
         public ICommand EditStudentsCommand { get; set; }
         public ICommand DeleteStudentsCommand { get; set; }
 
-        private Student _selectedStudent;
-        public Student SelectedStudent
+        private StudentWrapper _selectedStudent;
+        public StudentWrapper SelectedStudent
         {
             get 
             {
@@ -41,8 +42,8 @@ namespace Diary.ViewModels
         // implementuje dodatkowo interfejsy INotifyCollectionChanged, INotifyPropertyChanged
         // dzięki temu datagrid będzie informowany o tym
         // czy jekiś element został dodany lub zmieniony
-        private ObservableCollection<Student> _students;
-        public ObservableCollection<Student> Students
+        private ObservableCollection<StudentWrapper> _students;
+        public ObservableCollection<StudentWrapper> Students
         {
             get { return _students; }
             set
@@ -64,8 +65,8 @@ namespace Diary.ViewModels
         }
 
 
-        private ObservableCollection<Group> _groups;
-        public ObservableCollection<Group> Groups
+        private ObservableCollection<GroupWrapper> _groups;
+        public ObservableCollection<GroupWrapper> Groups
         {
             get { return _groups; }
             set
@@ -91,51 +92,51 @@ namespace Diary.ViewModels
 
         private void PopulateStudents()
         {
-            Students = new ObservableCollection<Student>
+            Students = new ObservableCollection<StudentWrapper>
             {
-            new Student
+            new StudentWrapper
             {
                 Id = 1,
                 FirstName = "Jan",
                 LastName = "Kowalski",
-                Group = new Group{Id = 1}
+                Group = new GroupWrapper{Id = 1}
             },
 
-            new Student
+            new StudentWrapper
             {
                 Id = 2,
                 FirstName = "Jan",
                 LastName = "Nowak",
-                Group = new Group{Id = 1}
+                Group = new GroupWrapper{Id = 1}
             },
 
-            new Student
+            new StudentWrapper
             {
                 Id = 3,
                 FirstName = "Alfred",
                 LastName = "Kowalski",
-                Group = new Group{Id = 1}
+                Group = new GroupWrapper{Id = 1}
             },
 
-             new Student
+             new StudentWrapper
              {
                  Id = 4,
                  FirstName = "Joanna",
                  LastName = "Bartkowiak",
-                 Group = new Group { Id = 1 }
+                 Group = new GroupWrapper { Id = 1 }
              },
             };
         }
 
         private void PopulateGroups()
         {
-            Groups = new ObservableCollection<Group>
+            Groups = new ObservableCollection<GroupWrapper>
             {
-                new Group {Id = 0, Name = "Wszyscy" },
-                new Group {Id = 1, Name = "1A" },
-                new Group {Id = 2, Name = "2A" },
-                new Group {Id = 3, Name = "2A" },
-                new Group {Id = 4, Name = "2B" },
+                new GroupWrapper {Id = 0, Name = "Wszyscy" },
+                new GroupWrapper {Id = 1, Name = "1A" },
+                new GroupWrapper {Id = 2, Name = "2A" },
+                new GroupWrapper {Id = 3, Name = "2A" },
+                new GroupWrapper {Id = 4, Name = "2B" },
             };
 
             SelectedGroupId = 0;
@@ -162,7 +163,7 @@ namespace Diary.ViewModels
             // nie jest to dobre rozwiązanie
             // Powinno się zastosować Dependency Injection
             // Utrudnia to stosowanie testów jednostkowych
-            var addEditStudentWindow = new AddEditStudentView(obj as Student);
+            var addEditStudentWindow = new AddEditStudentView(obj as StudentWrapper);
             // Subskrybujemy zdarzenie closed
             addEditStudentWindow.Closed += AddEditStudentWindow_Closed;
             addEditStudentWindow.ShowDialog();

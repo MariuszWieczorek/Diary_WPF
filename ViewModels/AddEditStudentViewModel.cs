@@ -1,5 +1,6 @@
 ﻿using Diary.Commands;
 using Diary.Models;
+using Diary.Models.Wrappers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,8 +18,8 @@ namespace Diary.ViewModels
         public ICommand CloseCommand { get; set; }
         public ICommand ConfirmCommand { get; set; }
 
-        private Student _student;
-        public Student Student
+        private StudentWrapper _student;
+        public StudentWrapper Student
         {
             get { return _student; }
             set
@@ -51,8 +52,8 @@ namespace Diary.ViewModels
         }
 
 
-        private ObservableCollection<Group> _groups;
-        public ObservableCollection<Group> Groups
+        private ObservableCollection<GroupWrapper> _groups;
+        public ObservableCollection<GroupWrapper> Groups
         {
             get { return _groups; }
             set
@@ -65,26 +66,26 @@ namespace Diary.ViewModels
 
         private void InitGroups()
         {
-            Groups = new ObservableCollection<Group>
+            Groups = new ObservableCollection<GroupWrapper>
             {
-                new Group {Id = 0, Name = "--" },
-                new Group {Id = 1, Name = "1A" },
-                new Group {Id = 2, Name = "2A" },
-                new Group {Id = 3, Name = "2A" },
-                new Group {Id = 4, Name = "2B" },
+                new GroupWrapper {Id = 0, Name = "--" },
+                new GroupWrapper {Id = 1, Name = "1A" },
+                new GroupWrapper {Id = 2, Name = "2A" },
+                new GroupWrapper {Id = 3, Name = "2A" },
+                new GroupWrapper {Id = 4, Name = "2B" },
             };
 
             SelectedGroupId = 0;
         }
 
-        public AddEditStudentViewModel(Student student = null)
+        public AddEditStudentViewModel(StudentWrapper student = null)
         {
             CloseCommand = new RelayCommand(Close);
             ConfirmCommand = new RelayCommand(Confirm);
 
             if (student == null)
             {
-                Student = new Student();
+                Student = new StudentWrapper();
             }
             else
             {
