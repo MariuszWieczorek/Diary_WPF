@@ -12,6 +12,8 @@ namespace Diary
 {
     public class Repository
     {
+        // Właściwie powinien być obiekt groupWrapper
+        // ale aby uniknąć pisania konwerterów
         public List<Group> GetGroups()
         {
             using (var context = new ApplicationBbContext())
@@ -26,7 +28,7 @@ namespace Diary
             {
 
                 var test = "test";
-                test = test.ToUpper().ReturnOne();
+                test = test.ToUpper().AddXXX();
 
                // dzięki typowi Querable zapytanie nie zostanie od razu wykonane
                 var students = context

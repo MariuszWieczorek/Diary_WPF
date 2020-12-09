@@ -95,6 +95,10 @@
     <Compile Include="Migrations\202012091130187_SetFirstNameLenghtMaxAndRequiredInStudentsTable.Designer.cs">
       <DependentUpon>202012091130187_SetFirstNameLenghtMaxAndRequiredInStudentsTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202012091750076_SetLastNameLenghtMaxAndRequiredInStudentsTable.cs" />
+    <Compile Include="Migrations\202012091750076_SetLastNameLenghtMaxAndRequiredInStudentsTable.Designer.cs">
+      <DependentUpon>202012091750076_SetLastNameLenghtMaxAndRequiredInStudentsTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Configurations\GroupConfiguration.cs" />
     <Compile Include="Models\Configurations\RatingConfiguration.cs" />
@@ -146,6 +150,9 @@
     <EmbeddedResource Include="Migrations\202012091130187_SetFirstNameLenghtMaxAndRequiredInStudentsTable.resx">
       <DependentUpon>202012091130187_SetFirstNameLenghtMaxAndRequiredInStudentsTable.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012091750076_SetLastNameLenghtMaxAndRequiredInStudentsTable.resx">
+      <DependentUpon>202012091750076_SetLastNameLenghtMaxAndRequiredInStudentsTable.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -159,7 +166,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="DbScripts\" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\add-512.png" />
   </ItemGroup>

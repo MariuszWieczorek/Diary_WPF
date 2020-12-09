@@ -1,5 +1,6 @@
 ﻿using Diary.Commands;
 using Diary.Models;
+using Diary.Models.Converters;
 using Diary.Models.Domains;
 using Diary.Models.Wrappers;
 using Diary.Views;
@@ -84,8 +85,8 @@ namespace Diary.ViewModels
         public MainWindowViewModel()
         {
 
-            // var str = "test".ToUpper().Replace("T", "123").Trim().PadRight(20, '0');
-            // MessageBox.Show(str);
+            var str = "test".ToUpper().Replace("T", "123").Trim().PadRight(20, '0').AddXXX();
+            //MessageBox.Show(str);
 
             // zostanie utworzone pierwsze zapytanie i utworzone bazy
             using ( var context = new ApplicationBbContext())
@@ -102,11 +103,6 @@ namespace Diary.ViewModels
 
             RefreshDiary();
 
-        }
-
-        public string myFunc(string x)
-        {
-            return x;
         }
 
         private void PopulateStudents()
@@ -147,22 +143,24 @@ namespace Diary.ViewModels
             };
         }
 
-        private void PopulateGroups()
+        private void InitGroups()
         {
 
             var groups = _repository.GetGroups();
+            // wstawiamy grupę domyślną
             groups.Insert(0, new Group { Id = 0, Name = "Wszystkie" });
 
             // tworzymy nowy obiekt ObservableCollection i przekazujemy
-            // listę jako parametr
+            // listę jako parametr do konstruktora
             Groups = new ObservableCollection<Group>(groups);
             SelectedGroupId = 0;
         }
 
         private void RefreshDiary()
         {
+            InitGroups();
             PopulateStudents();
-            PopulateGroups();
+          
         }
 
 

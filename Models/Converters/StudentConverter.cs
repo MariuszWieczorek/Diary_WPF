@@ -14,9 +14,9 @@ namespace Diary.Models.Converters
 
     public static class StringExtensions
     {
-        public static string ReturnOne(this string model )
+        public static string AddXXX(this string model )
         {
-            return "1";
+            return model+"_XXX";
         }
     }
 
@@ -26,7 +26,27 @@ namespace Diary.Models.Converters
     {
         public static StudentWrapper ToWrapper(this Student model)
         {
-            return new StudentWrapper();
+            return new StudentWrapper
+            {
+                Id = model.Id,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Comments = model.Comments,
+                Activities = model.Activities,
+                Group = new GroupWrapper
+                { 
+                    Id = model.Group.Id,
+                    Name = model.Group.Name
+                },
+                // tu chcemy mieć listę ocen wyświetlaną po przecinku
+                // używamy metod zamieniającej Listę na stringa
+                Math = string.Join(",",model.Ratings.Where(y => y.SubjectId == (int)Subject.Math).Select(y => y.Rate)),
+                Physics = string.Join(",", model.Ratings.Where(y => y.SubjectId == (int)Subject.Physics).Select(y => y.Rate)),
+                Technology = string.Join(",", model.Ratings.Where(y => y.SubjectId == (int)Subject.Technology).Select(y => y.Rate)),
+                PolishLang = string.Join(",", model.Ratings.Where(y => y.SubjectId == (int)Subject.PolishLang).Select(y => y.Rate)),
+                ForeignLang = string.Join(",", model.Ratings.Where(y => y.SubjectId == (int)Subject.ForeignLang).Select(y=>y.Rate)),
+
+            };
         }
     }
 }

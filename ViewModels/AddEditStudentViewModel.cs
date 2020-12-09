@@ -133,20 +133,7 @@ namespace Diary.ViewModels
         /// <summary>
         /// Archiwalna metoda
         /// </summary>
-        /*
-        private void PopulateGroups()
-        {
-            Groups = new ObservableCollection<Group>
-            {
-                new GroupWrapper {Id = 0, Name = "--" },
-                new GroupWrapper {Id = 1, Name = "1A" },
-                new GroupWrapper {Id = 2, Name = "2A" },
-                new GroupWrapper {Id = 3, Name = "2A" },
-                new GroupWrapper {Id = 4, Name = "2B" },
-            };
-
-            SelectedGroupId = 0;
-        }
-        */
+        
+           
     }
 }
