@@ -87,6 +87,14 @@
     <Compile Include="ApplicationBbContext.cs" />
     <Compile Include="Commands\AsyncRelayCommand.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Configurations\GroupConfiguration.cs" />
+    <Compile Include="Models\Configurations\RatingConfiguration.cs" />
+    <Compile Include="Models\Configurations\StudentConfiguration.cs" />
+    <Compile Include="Models\Domains\Group.cs" />
+    <Compile Include="Models\Domains\Rating.cs" />
+    <Compile Include="Models\Domains\Student.cs" />
+    <Compile Include="Models\Subject.cs" />
     <Compile Include="Models\Wrappers\GroupWrapper.cs" />
     <Compile Include="Models\Wrappers\StudentWrapper.cs" />
     <Compile Include="ViewModels\AddEditStudentViewModel.cs" />
@@ -136,8 +144,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\Configurations\" />
-    <Folder Include="Models\Domains\" />
+    <Folder Include="Models\Converters\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\add-512.png" />

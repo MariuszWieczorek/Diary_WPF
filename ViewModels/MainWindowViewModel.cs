@@ -79,6 +79,13 @@ namespace Diary.ViewModels
 
         public MainWindowViewModel()
         {
+
+            // zostanie utworzone pierwsze zapytanie i utworzone bazy
+            using ( var context = new ApplicationBbContext())
+            {
+                var students = context.Students.ToList();
+            }
+
             RefreshStudentsCommand = new RelayCommand(RefreshStudents);
             AddStudentsCommand = new RelayCommand(AddEditStudents);
             EditStudentsCommand = new RelayCommand(AddEditStudents, CanEditDeleteStudents);
