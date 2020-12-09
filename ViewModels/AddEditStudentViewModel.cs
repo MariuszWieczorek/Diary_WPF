@@ -1,5 +1,6 @@
 ﻿using Diary.Commands;
 using Diary.Models;
+using Diary.Models.Domains;
 using Diary.Models.Wrappers;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace Diary.ViewModels
     class AddEditStudentViewModel : ViewModelBase
     {
 
+        private Repository _repository = new Repository();
         public ICommand CloseCommand { get; set; }
         public ICommand ConfirmCommand { get; set; }
 
@@ -52,8 +54,8 @@ namespace Diary.ViewModels
         }
 
 
-        private ObservableCollection<GroupWrapper> _groups;
-        public ObservableCollection<GroupWrapper> Groups
+        private ObservableCollection<Group> _groups;
+        public ObservableCollection<Group> Groups
         {
             get { return _groups; }
             set
@@ -66,17 +68,17 @@ namespace Diary.ViewModels
 
         private void InitGroups()
         {
-            Groups = new ObservableCollection<GroupWrapper>
-            {
-                new GroupWrapper {Id = 0, Name = "--" },
-                new GroupWrapper {Id = 1, Name = "1A" },
-                new GroupWrapper {Id = 2, Name = "2A" },
-                new GroupWrapper {Id = 3, Name = "2A" },
-                new GroupWrapper {Id = 4, Name = "2B" },
-            };
 
-            SelectedGroupId = 0;
+            var groups = _repository.GetGroups();
+            groups.Insert(0, new Group { Id = 0, Name = "--" });
+
+            // tworzymy nowy obiekt ObservableCollection i przekazujemy
+            // listę jako parametr
+            Groups = new ObservableCollection<Group>(groups);
+            Student.Group.Id = 0;
         }
+
+     
 
         public AddEditStudentViewModel(StudentWrapper student = null)
         {
@@ -126,5 +128,25 @@ namespace Diary.ViewModels
         {
             window.Close();
         }
+
+
+        /// <summary>
+        /// Archiwalna metoda
+        /// </summary>
+        /*
+        private void PopulateGroups()
+        {
+            Groups = new ObservableCollection<Group>
+            {
+                new GroupWrapper {Id = 0, Name = "--" },
+                new GroupWrapper {Id = 1, Name = "1A" },
+                new GroupWrapper {Id = 2, Name = "2A" },
+                new GroupWrapper {Id = 3, Name = "2A" },
+                new GroupWrapper {Id = 4, Name = "2B" },
+            };
+
+            SelectedGroupId = 0;
+        }
+        */
     }
 }

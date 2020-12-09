@@ -1,5 +1,6 @@
 ﻿using Diary.Commands;
 using Diary.Models;
+using Diary.Models.Domains;
 using Diary.Models.Wrappers;
 using Diary.Views;
 using MahApps.Metro.Controls;
@@ -18,6 +19,7 @@ namespace Diary.ViewModels
     class MainWindowViewModel : ViewModelBase
     {
 
+        private Repository _repository = new Repository();
         public ICommand RefreshStudentsCommand { get; set; }
         public ICommand AddStudentsCommand { get; set; }
         public ICommand EditStudentsCommand { get; set; }
@@ -37,6 +39,8 @@ namespace Diary.ViewModels
                 OnPropertyChanged();
             }
         }
+
+        
 
         // używamy zamiast List<> zachowuje się jak zwykła lista
         // implementuje dodatkowo interfejsy INotifyCollectionChanged, INotifyPropertyChanged
@@ -65,8 +69,8 @@ namespace Diary.ViewModels
         }
 
 
-        private ObservableCollection<GroupWrapper> _groups;
-        public ObservableCollection<GroupWrapper> Groups
+        private ObservableCollection<Group> _groups;
+        public ObservableCollection<Group> Groups
         {
             get { return _groups; }
             set
@@ -79,6 +83,9 @@ namespace Diary.ViewModels
 
         public MainWindowViewModel()
         {
+
+            // var str = "test".ToUpper().Replace("T", "123").Trim().PadRight(20, '0');
+            // MessageBox.Show(str);
 
             // zostanie utworzone pierwsze zapytanie i utworzone bazy
             using ( var context = new ApplicationBbContext())
@@ -95,6 +102,11 @@ namespace Diary.ViewModels
 
             RefreshDiary();
 
+        }
+
+        public string myFunc(string x)
+        {
+            return x;
         }
 
         private void PopulateStudents()
@@ -137,15 +149,13 @@ namespace Diary.ViewModels
 
         private void PopulateGroups()
         {
-            Groups = new ObservableCollection<GroupWrapper>
-            {
-                new GroupWrapper {Id = 0, Name = "Wszyscy" },
-                new GroupWrapper {Id = 1, Name = "1A" },
-                new GroupWrapper {Id = 2, Name = "2A" },
-                new GroupWrapper {Id = 3, Name = "2A" },
-                new GroupWrapper {Id = 4, Name = "2B" },
-            };
 
+            var groups = _repository.GetGroups();
+            groups.Insert(0, new Group { Id = 0, Name = "Wszystkie" });
+
+            // tworzymy nowy obiekt ObservableCollection i przekazujemy
+            // listę jako parametr
+            Groups = new ObservableCollection<Group>(groups);
             SelectedGroupId = 0;
         }
 

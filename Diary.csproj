@@ -87,16 +87,26 @@
     <Compile Include="ApplicationBbContext.cs" />
     <Compile Include="Commands\AsyncRelayCommand.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="Migrations\202012091032085_InitialCreate.cs" />
+    <Compile Include="Migrations\202012091032085_InitialCreate.Designer.cs">
+      <DependentUpon>202012091032085_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012091130187_SetFirstNameLenghtMaxAndRequiredInStudentsTable.cs" />
+    <Compile Include="Migrations\202012091130187_SetFirstNameLenghtMaxAndRequiredInStudentsTable.Designer.cs">
+      <DependentUpon>202012091130187_SetFirstNameLenghtMaxAndRequiredInStudentsTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Configurations\GroupConfiguration.cs" />
     <Compile Include="Models\Configurations\RatingConfiguration.cs" />
     <Compile Include="Models\Configurations\StudentConfiguration.cs" />
+    <Compile Include="Models\Converters\StudentConverter.cs" />
     <Compile Include="Models\Domains\Group.cs" />
     <Compile Include="Models\Domains\Rating.cs" />
     <Compile Include="Models\Domains\Student.cs" />
     <Compile Include="Models\Subject.cs" />
     <Compile Include="Models\Wrappers\GroupWrapper.cs" />
     <Compile Include="Models\Wrappers\StudentWrapper.cs" />
+    <Compile Include="Repository.cs" />
     <Compile Include="ViewModels\AddEditStudentViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
@@ -130,6 +140,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Migrations\202012091032085_InitialCreate.resx">
+      <DependentUpon>202012091032085_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012091130187_SetFirstNameLenghtMaxAndRequiredInStudentsTable.resx">
+      <DependentUpon>202012091130187_SetFirstNameLenghtMaxAndRequiredInStudentsTable.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -143,9 +159,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\Converters\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Images\add-512.png" />
   </ItemGroup>
