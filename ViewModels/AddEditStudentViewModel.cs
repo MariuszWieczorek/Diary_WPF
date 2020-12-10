@@ -117,11 +117,13 @@ namespace Diary.ViewModels
         private void AddNewStudent()
         {
             //TODO: Dodanie nowego studenta do bazy
+            _repository.AddStudent(Student);
         }
 
         private void UpdateStudent()
         {
             //TODO: Aktualizacja Studenta w bazie
+            _repository.UpdateStudent(Student);
         }
 
         private void CloseWindow(Window window)

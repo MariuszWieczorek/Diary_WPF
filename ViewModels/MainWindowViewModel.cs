@@ -85,8 +85,8 @@ namespace Diary.ViewModels
         public MainWindowViewModel()
         {
 
-            var str = "test".ToUpper().Replace("T", "123").Trim().PadRight(20, '0').AddXXX();
-            //MessageBox.Show(str);
+            
+            
 
             // zostanie utworzone pierwsze zapytanie i utworzone bazy
             using ( var context = new ApplicationBbContext())
@@ -105,7 +105,7 @@ namespace Diary.ViewModels
 
         }
 
-        private void PopulateStudents()
+        private void PopulateStudents2()
         {
             Students = new ObservableCollection<StudentWrapper>
             {
@@ -159,8 +159,8 @@ namespace Diary.ViewModels
         private void RefreshDiary()
         {
             InitGroups();
-            PopulateStudents();
-          
+            Students = new ObservableCollection<StudentWrapper>(_repository.GetStudents(SelectedGroupId));
+
         }
 
 
@@ -210,6 +210,7 @@ namespace Diary.ViewModels
             }
 
             // TODO : usuwanie z bazy
+            _repository.DeleteStudent(SelectedStudent.Id);
 
             RefreshDiary();
         }
