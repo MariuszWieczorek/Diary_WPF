@@ -88,10 +88,10 @@ namespace Diary
 
                 
                 UpdateRate(student, ratings, context, studentRatings, Subject.Math);
-                UpdateRate(student, ratings, context, studentRatings, Subject.Technology);
-                UpdateRate(student, ratings, context, studentRatings, Subject.Physics);
-                UpdateRate(student, ratings, context, studentRatings, Subject.PolishLang);
-                UpdateRate(student, ratings, context, studentRatings, Subject.ForeignLang);
+               // UpdateRate(student, ratings, context, studentRatings, Subject.Technology);
+               // UpdateRate(student, ratings, context, studentRatings, Subject.Physics);
+               // UpdateRate(student, ratings, context, studentRatings, Subject.PolishLang);
+               // UpdateRate(student, ratings, context, studentRatings, Subject.ForeignLang);
 
                 try
                 {
@@ -144,11 +144,12 @@ namespace Diary
             // obecne oceny
             var oldRating = studentRatings
                 .Where(x => x.SubjectId == (int)subject)
-                .Select(x => x.Rate);
+                .Select(x => x.Rate).ToList();
+            
             //nowe oceny 
             var newRating = ratings
                 .Where(x => x.SubjectId == (int)subject)
-                .Select(x => x.Rate);
+                .Select(x => x.Rate).ToList();
             
             //do usunięcia są w starej nie ma w nowej
             var ratingsToDelete = oldRating.Except(newRating).ToList();
