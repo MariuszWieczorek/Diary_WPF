@@ -75,7 +75,8 @@ namespace Diary.ViewModels
             // tworzymy nowy obiekt ObservableCollection i przekazujemy
             // listę jako parametr
             Groups = new ObservableCollection<Group>(groups);
-            Student.Group.Id = 0;
+            if(Student != null)
+                Student.Group.Id = Student.Group.Id; 
         }
 
      

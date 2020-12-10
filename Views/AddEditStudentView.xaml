@@ -101,7 +101,7 @@
             />
 
         <CheckBox 
-            IsChecked ="{Binding Student.Activity}"
+            IsChecked ="{Binding Student.Activities}"
             Grid.Row="9" 
             Content="Zajęcia dodatkowe" 
             Grid.Column="1" 

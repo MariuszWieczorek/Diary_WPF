@@ -86,13 +86,23 @@ namespace Diary
                 // foreach (var item in Enum.GetNames(typeof(Subject)))
                 // foreach (WorkingDays item in Enum.GetValues(typeof(WorkingDays)))
 
-                  UpdateRate(student, ratings, context, studentRatings, Subject.Math);
-                //UpdateRate(student, ratings, context, studentRatings, Subject.Technology);
-                //UpdateRate(student, ratings, context, studentRatings, Subject.Physics);
-                //UpdateRate(student, ratings, context, studentRatings, Subject.PolishLang);
-                //UpdateRate(student, ratings, context, studentRatings, Subject.ForeignLang);
+                
+                UpdateRate(student, ratings, context, studentRatings, Subject.Math);
+                UpdateRate(student, ratings, context, studentRatings, Subject.Technology);
+                UpdateRate(student, ratings, context, studentRatings, Subject.Physics);
+                UpdateRate(student, ratings, context, studentRatings, Subject.PolishLang);
+                UpdateRate(student, ratings, context, studentRatings, Subject.ForeignLang);
 
-                context.SaveChanges();
+                try
+                {
+                    context.SaveChanges();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Błąd zapisu do bazy");
+                    return; 
+                }
+                
 
             }
         }
@@ -115,7 +125,7 @@ namespace Diary
             studentToUpdate.FirstName = student.FirstName;
             studentToUpdate.LastName = student.LastName;
             studentToUpdate.Comments = student.Comments;
-            studentToUpdate.GroupId = student.Group.Id;
+            studentToUpdate.GroupId = student.GroupId;
         }
 
         /// <summary>
@@ -126,7 +136,8 @@ namespace Diary
         /// <param name="context"></param>
         /// <param name="studentRatings"></param>
         /// <param name="subject"></param>
-        private static void UpdateRate(Student student, List<Rating> ratings, ApplicationBbContext context, List<Rating> studentRatings, Subject  subject)
+        private static void UpdateRate(Student student, List<Rating> ratings,
+            ApplicationBbContext context, List<Rating> studentRatings, Subject  subject)
         {
             // musimy je porównac z nowymi ocenami
             // musimy to podzielić na kilka etapów
@@ -138,10 +149,14 @@ namespace Diary
             var newRating = ratings
                 .Where(x => x.SubjectId == (int)subject)
                 .Select(x => x.Rate);
+            
             //do usunięcia są w starej nie ma w nowej
             var ratingsToDelete = oldRating.Except(newRating).ToList();
+            
             // dododania
             var ratingsToAdd = newRating.Except(oldRating).ToList();
+
+            int bi = 1;
 
             ratingsToDelete.ForEach(x =>
             {

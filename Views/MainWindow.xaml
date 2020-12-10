@@ -81,7 +81,7 @@
                 <DataGridTextColumn Binding="{Binding Comments}" Header="Uwagi"/>
                 <DataGridTextColumn Binding="{Binding Math}" Header="Matematyka"/>
                 <DataGridTextColumn Binding="{Binding Technology}" Header="Technologia"/>
-                <DataGridTextColumn Binding="{Binding Physisc}" Header="Fizyka"/>
+                <DataGridTextColumn Binding="{Binding Physics}" Header="Fizyka"/>
                 <DataGridTextColumn Binding="{Binding PolishLang}" Header="Język Polski" />
                 <DataGridTextColumn Binding="{Binding ForeignLang}" Header="Język Obcy" />
                 <DataGridCheckBoxColumn Binding="{Binding Activities}" Header="Dodatkowe" />
