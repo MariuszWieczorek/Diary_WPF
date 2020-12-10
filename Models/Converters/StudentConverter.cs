@@ -100,7 +100,7 @@ namespace Diary.Models.Converters
             // i zamienić na listę stringów
             // ForEach() - dla każdej oceny chcemy mieć nowy rekord obiekt klasy Rating
            
-            if (string.IsNullOrWhiteSpace(model.Math))
+            if (!string.IsNullOrWhiteSpace(model.Math))
                 model.Math.Split(',').ToList().ForEach(x =>
                 ratings.Add(
                    new Rating
@@ -110,7 +110,7 @@ namespace Diary.Models.Converters
                        SubjectId = (int)Subject.Math
                    }));
 
-            if (string.IsNullOrWhiteSpace(model.Physics))
+            if (!string.IsNullOrWhiteSpace(model.Physics))
                 model.Physics.Split(',').ToList().ForEach(x =>
                 ratings.Add(
                    new Rating
@@ -120,7 +120,7 @@ namespace Diary.Models.Converters
                        SubjectId = (int)Subject.Physics
                    }));
 
-            if (string.IsNullOrWhiteSpace(model.Technology))
+            if (!string.IsNullOrWhiteSpace(model.Technology))
                 model.Technology.Split(',').ToList().ForEach(x =>
                 ratings.Add(
                    new Rating
@@ -130,7 +130,7 @@ namespace Diary.Models.Converters
                        SubjectId = (int)Subject.Technology
                    }));
 
-            if (string.IsNullOrWhiteSpace(model.PolishLang))
+            if (!string.IsNullOrWhiteSpace(model.PolishLang))
                 model.PolishLang.Split(',').ToList().ForEach(x =>
                 ratings.Add(
                    new Rating
@@ -140,7 +140,7 @@ namespace Diary.Models.Converters
                        SubjectId = (int)Subject.PolishLang
                    }));
 
-            if (string.IsNullOrWhiteSpace(model.ForeignLang))
+            if (!string.IsNullOrWhiteSpace(model.ForeignLang))
                 model.ForeignLang.Split(',').ToList().ForEach(x =>
                 ratings.Add(
                    new Rating
