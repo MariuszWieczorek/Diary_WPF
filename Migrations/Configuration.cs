@@ -10,7 +10,6 @@ namespace Diary.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "Diary.ApplicationBbContext";
         }
 
         protected override void Seed(Diary.ApplicationBbContext context)

@@ -27,7 +27,7 @@ namespace Diary.Models.Wrappers
         public string Physics { get; set; }
         public string PolishLang { get; set; }
         public string ForeignLang { get; set; }
-        public string Activities { get; set; }
+        public bool Activities { get; set; }
         public GroupWrapper Group { get; set; }
 
 

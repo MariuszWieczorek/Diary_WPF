@@ -87,17 +87,9 @@
     <Compile Include="ApplicationBbContext.cs" />
     <Compile Include="Commands\AsyncRelayCommand.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
-    <Compile Include="Migrations\202012091032085_InitialCreate.cs" />
-    <Compile Include="Migrations\202012091032085_InitialCreate.Designer.cs">
-      <DependentUpon>202012091032085_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202012091130187_SetFirstNameLenghtMaxAndRequiredInStudentsTable.cs" />
-    <Compile Include="Migrations\202012091130187_SetFirstNameLenghtMaxAndRequiredInStudentsTable.Designer.cs">
-      <DependentUpon>202012091130187_SetFirstNameLenghtMaxAndRequiredInStudentsTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202012091750076_SetLastNameLenghtMaxAndRequiredInStudentsTable.cs" />
-    <Compile Include="Migrations\202012091750076_SetLastNameLenghtMaxAndRequiredInStudentsTable.Designer.cs">
-      <DependentUpon>202012091750076_SetLastNameLenghtMaxAndRequiredInStudentsTable.cs</DependentUpon>
+    <Compile Include="Migrations\202012110642422_init.cs" />
+    <Compile Include="Migrations\202012110642422_init.Designer.cs">
+      <DependentUpon>202012110642422_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Configurations\GroupConfiguration.cs" />
@@ -144,14 +136,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\202012091032085_InitialCreate.resx">
-      <DependentUpon>202012091032085_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202012091130187_SetFirstNameLenghtMaxAndRequiredInStudentsTable.resx">
-      <DependentUpon>202012091130187_SetFirstNameLenghtMaxAndRequiredInStudentsTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202012091750076_SetLastNameLenghtMaxAndRequiredInStudentsTable.resx">
-      <DependentUpon>202012091750076_SetLastNameLenghtMaxAndRequiredInStudentsTable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202012110642422_init.resx">
+      <DependentUpon>202012110642422_init.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -167,7 +153,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DbScripts\" />
+    <Folder Include="Migrations\DbScripts\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\add-512.png" />

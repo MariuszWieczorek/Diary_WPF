@@ -46,7 +46,7 @@ namespace Diary
 
                 // musimy przekonwertować na StudentWrapper
                 // poniżej przykładowo przekonwertowany pojedynczy student
-                var student = students.First().ToWrapper();
+                // var student = students.First().ToWrapper();
 
                 // musimy przekonwertować na StudentWrapper całą listę
                 // czyli chcemy wywołać tę metodę dla każdego studenta z listy
@@ -88,10 +88,10 @@ namespace Diary
 
                 
                 UpdateRate(student, ratings, context, studentRatings, Subject.Math);
-               // UpdateRate(student, ratings, context, studentRatings, Subject.Technology);
-               // UpdateRate(student, ratings, context, studentRatings, Subject.Physics);
-               // UpdateRate(student, ratings, context, studentRatings, Subject.PolishLang);
-               // UpdateRate(student, ratings, context, studentRatings, Subject.ForeignLang);
+                UpdateRate(student, ratings, context, studentRatings, Subject.Technology);
+                UpdateRate(student, ratings, context, studentRatings, Subject.Physics);
+                UpdateRate(student, ratings, context, studentRatings, Subject.PolishLang);
+                UpdateRate(student, ratings, context, studentRatings, Subject.ForeignLang);
 
                 try
                 {
@@ -142,20 +142,24 @@ namespace Diary
             // musimy je porównac z nowymi ocenami
             // musimy to podzielić na kilka etapów
             // obecne oceny
-            var oldRating = studentRatings
+            var oldRatings = studentRatings
                 .Where(x => x.SubjectId == (int)subject)
                 .Select(x => x.Rate).ToList();
             
             //nowe oceny 
-            var newRating = ratings
+            var newRatings = ratings
                 .Where(x => x.SubjectId == (int)subject)
                 .Select(x => x.Rate).ToList();
-            
+
             //do usunięcia są w starej nie ma w nowej
-            var ratingsToDelete = oldRating.Except(newRating).ToList();
+            //var ratingsToDelete = oldRating.Except(newRating).ToList();
+            var ratingsToDelete = GetSubRatingsToAdd(oldRatings, newRatings);
             
             // dododania
-            var ratingsToAdd = newRating.Except(oldRating).ToList();
+            //var ratingsToAdd = newRating.Except(oldRating).ToList();
+            var ratingsToAdd = GetSubRatingsToAdd(oldRatings, newRatings);
+
+
 
             int bi = 1;
 
@@ -214,8 +218,39 @@ namespace Diary
                 context.SaveChanges();
 
             }
-
-
         }
+
+        private List<int> GetSubRatingsToAdd(
+            IEnumerable<int> oldSubRatings, IEnumerable<int> newSubRatings)
+        {
+            var subRatingsToAdd = new List<int>();
+            var oldListCopy = new List<int>(oldSubRatings);
+            foreach (var item in newSubRatings)
+            {
+                var itemInOldList = oldListCopy.FirstOrDefault(x => x == item);
+                if (itemInOldList != 0)
+                    oldListCopy.Remove(itemInOldList);
+                else
+                    subRatingsToAdd.Add(item);
+            }
+            return subRatingsToAdd;
+        }
+
+        private List<int> GetSubRatingsToDelete(
+            IEnumerable<int> oldSubRatings, IEnumerable<int> newSubRatings)
+        {
+            var subRatingsToDelete = new List<int>();
+            var newListCopy = new List<int>(newSubRatings);
+            foreach (var item in oldSubRatings)
+            {
+                var itemInNewList = newListCopy.FirstOrDefault(x => x == item);
+                if (itemInNewList != 0)
+                    newListCopy.Remove(itemInNewList);
+                else
+                    subRatingsToDelete.Add(item);
+            }
+            return subRatingsToDelete;
+        }
+
     }
 }
