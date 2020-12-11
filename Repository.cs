@@ -152,12 +152,12 @@ namespace Diary
                 .Select(x => x.Rate).ToList();
 
             //do usunięcia są w starej nie ma w nowej
-            //var ratingsToDelete = oldRating.Except(newRating).ToList();
-            var ratingsToDelete = GetSubRatingsToAdd(oldRatings, newRatings);
+            //var ratingsToDelete = oldRatings.Except(newRatings).ToList();
+            var ratingsToDelete = GetSubRatingsToDelete(oldRatings, newRatings).ToList();
             
             // dododania
-            //var ratingsToAdd = newRating.Except(oldRating).ToList();
-            var ratingsToAdd = GetSubRatingsToAdd(oldRatings, newRatings);
+            //var ratingsToAdd = newRatings.Except(oldRatings).ToList();
+            var ratingsToAdd = GetSubRatingsToAdd(oldRatings, newRatings).ToList();
 
 
 
@@ -220,7 +220,7 @@ namespace Diary
             }
         }
 
-        private List<int> GetSubRatingsToAdd(
+        private static List<int> GetSubRatingsToAdd(
             IEnumerable<int> oldSubRatings, IEnumerable<int> newSubRatings)
         {
             var subRatingsToAdd = new List<int>();
@@ -236,7 +236,7 @@ namespace Diary
             return subRatingsToAdd;
         }
 
-        private List<int> GetSubRatingsToDelete(
+        private static List<int> GetSubRatingsToDelete(
             IEnumerable<int> oldSubRatings, IEnumerable<int> newSubRatings)
         {
             var subRatingsToDelete = new List<int>();
