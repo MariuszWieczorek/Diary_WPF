@@ -22,6 +22,7 @@ namespace Diary.ViewModels
 
         private Repository _repository = new Repository();
         public ICommand RefreshStudentsCommand { get; set; }
+        public ICommand ConectionConfigurationCommand { get; set; }
         public ICommand AddStudentsCommand { get; set; }
         public ICommand EditStudentsCommand { get; set; }
         public ICommand DeleteStudentsCommand { get; set; }
@@ -96,6 +97,7 @@ namespace Diary.ViewModels
 
             RefreshStudentsCommand = new RelayCommand(RefreshStudents);
             AddStudentsCommand = new RelayCommand(AddEditStudents);
+            ConectionConfigurationCommand = new RelayCommand(ConectionConfiguration);
             EditStudentsCommand = new RelayCommand(AddEditStudents, CanEditDeleteStudents);
             DeleteStudentsCommand = new AsyncRelayCommand(DeleteStudents, CanEditDeleteStudents);
 
@@ -104,6 +106,8 @@ namespace Diary.ViewModels
             RefreshDiary();
 
         }
+
+
 
         private void PopulateStudents2()
         {
@@ -213,6 +217,12 @@ namespace Diary.ViewModels
             _repository.DeleteStudent(SelectedStudent.Id);
 
             RefreshDiary();
+        }
+
+        private void ConectionConfiguration(object obj)
+        {
+            var connectionConfigurationWindow = new ConnectionConfigurationView();
+            connectionConfigurationWindow.ShowDialog();
         }
 
 

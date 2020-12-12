@@ -1,0 +1,93 @@
+﻿<mah:MetroWindow x:Class="Diary.Views.ConnectionConfigurationView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:local="clr-namespace:Diary"
+        mc:Ignorable="d"
+        Name="ConnectionConfigurationView_Window"         
+        WindowStartupLocation="CenterScreen"
+        Title="Dane konfiguracyjne połączenia z bazą SQL" Height="520" Width="400">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="1" Content="Adres Serwera" Margin="5"/>
+        <TextBox 
+            Text ="{Binding xxx}"
+            Grid.Row="1"
+            Grid.Column="1"
+            Margin="5"/>
+
+        <Label Grid.Row="2" Content="Nazwa Instancji" Margin="5"/>
+        <TextBox 
+            Grid.Row="2"
+            Grid.Column="1"
+            Margin="5"/>
+
+        <Label Grid.Row="3" Content="Nazwa Bazy" Margin="5"/>
+        <TextBox 
+            Grid.Row="3"
+            Grid.Column="1"
+            Margin="5"/>
+
+        <Label Grid.Row="4" Content="Użytkownik" Margin="5"/>
+        <TextBox 
+            Grid.Row="4"
+            Grid.Column="1"
+            Margin="5"/>
+
+        <Label Grid.Row="5" Content="Hasło" Margin="5"/>
+        <TextBox 
+            Grid.Row="5"
+            Grid.Column="1"
+            Margin="5"/>
+
+
+
+        <StackPanel Orientation="Horizontal" Grid.Row="11" Grid.Column="1" HorizontalAlignment="Right">
+
+            <Button 
+                Command="{Binding CloseCommand}"
+                CommandParameter="{Binding  ElementName=ConnectionConfigurationView_Window}"
+                Content="Anuluj"
+                Height="30"
+                Width="100"
+                Margin="5"/>
+            
+            <Button 
+                Command="{Binding ConfirmCommand}"
+                CommandParameter="{Binding  ElementName=ConnectionConfigurationView_Window}"
+                Content="Zatwierdź"
+                Height="30"
+                Width="100"
+                Margin="5"/>
+
+
+        </StackPanel>
+
+
+    </Grid>
+
+
+
+</mah:MetroWindow>

@@ -61,6 +61,16 @@
                 Width="100"
                 Margin="5"
              />
+
+
+            <Button  
+                Command ="{Binding ConectionConfigurationCommand}"
+                Content="Konfiguracja" 
+                Height="30" 
+                Width="100"
+                Margin="5"
+             />
+            
             <!-- Style ="{StaticResource ButtonRefreshStyle}" -->
             
         </StackPanel>
