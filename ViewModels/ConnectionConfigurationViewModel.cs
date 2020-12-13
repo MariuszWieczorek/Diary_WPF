@@ -63,7 +63,7 @@ namespace Diary.ViewModels
 
         private bool TestSettings()
         {
-            MessageBox.Show(ConnectionSettings.ServerAddress);
+         
 
             if (!ConnectionSettings.IsValid)
             {
