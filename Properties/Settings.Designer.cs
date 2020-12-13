@@ -50,12 +50,12 @@ namespace Diary.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string DataBase {
+        public string Database {
             get {
-                return ((string)(this["DataBase"]));
+                return ((string)(this["Database"]));
             }
             set {
-                this["DataBase"] = value;
+                this["Database"] = value;
             }
         }
         

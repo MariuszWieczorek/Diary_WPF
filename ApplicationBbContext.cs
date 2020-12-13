@@ -1,10 +1,11 @@
 using Diary.Models.Configurations;
 using Diary.Models.Domains;
 using Diary.Properties;
+using Diary;
 using System;
 using System.Data.Entity;
 using System.Linq;
-
+using System.Windows;
 
 namespace Diary
 {
@@ -39,11 +40,11 @@ namespace Diary
         {
             get
             {
-                return Settings.Default.DataBase;
+                return Settings.Default.Database;
             }
             set
             {
-                Settings.Default.DataBase = value;
+                Settings.Default.Database = value;
             }
         }
 
@@ -83,14 +84,21 @@ namespace Diary
 
         // ConnectionString "name=ApplicationBbContext"
 
-        private static string _connectionString = "Server=127.0.0.1;Database=Diary;Uid=user1;Pwd=alamakota;";
+        private static string _emergencyConnectionString = "Server=127.0.0.1;Database=Diary;Uid=user1;Pwd=alamakota;";
 
         
+       private static string _connectionString = DbHelper.ConnectionStringBuilder(ServerAddress, ServerName, DataBase, User, Password);
+ 
+    
         public ApplicationBbContext() 
             : base(_connectionString)
         {
         }
 
+        public ApplicationBbContext(string connectionString)
+            : base(connectionString)
+        {
+        }
 
         // wskazujemy klasy domenowe
         // Entity Framework wie, ¿e ma stworzyæ 3 tabele jak poni¿ej

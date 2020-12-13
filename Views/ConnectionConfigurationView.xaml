@@ -33,31 +33,35 @@
 
         <Label Grid.Row="1" Content="Adres Serwera" Margin="5"/>
         <TextBox 
-            Text ="{Binding xxx}"
+            Text ="{Binding ConnectionSettings.ServerAddress}"
             Grid.Row="1"
             Grid.Column="1"
             Margin="5"/>
 
         <Label Grid.Row="2" Content="Nazwa Instancji" Margin="5"/>
         <TextBox 
+            Text ="{Binding ConnectionSettings.ServerName}"
             Grid.Row="2"
             Grid.Column="1"
             Margin="5"/>
 
         <Label Grid.Row="3" Content="Nazwa Bazy" Margin="5"/>
         <TextBox 
+            Text ="{Binding ConnectionSettings.Database,ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}"
             Grid.Row="3"
             Grid.Column="1"
             Margin="5"/>
 
         <Label Grid.Row="4" Content="Użytkownik" Margin="5"/>
         <TextBox 
+            Text ="{Binding ConnectionSettings.User,ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}"
             Grid.Row="4"
             Grid.Column="1"
             Margin="5"/>
 
         <Label Grid.Row="5" Content="Hasło" Margin="5"/>
         <TextBox 
+            Text ="{Binding ConnectionSettings.Password,ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}"
             Grid.Row="5"
             Grid.Column="1"
             Margin="5"/>

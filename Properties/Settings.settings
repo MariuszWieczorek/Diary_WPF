@@ -8,7 +8,7 @@
     <Setting Name="ServerName" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="DataBase" Type="System.String" Scope="User">
+    <Setting Name="Database" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="User" Type="System.String" Scope="User">

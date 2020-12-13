@@ -75,6 +75,7 @@ namespace Diary.Models.Wrappers
                 return Error;
             }
         }
+
         public string Error { get; set; }
         public bool IsValid
         {

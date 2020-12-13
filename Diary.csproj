@@ -89,6 +89,7 @@
       <SubType>Designer</SubType>
     </Page>
     <Compile Include="ApplicationBbContext.cs" />
+    <Compile Include="DbHelper.cs" />
     <Compile Include="Commands\AsyncRelayCommand.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Migrations\202012110642422_init.cs" />
@@ -104,6 +105,7 @@
     <Compile Include="Models\Domains\Rating.cs" />
     <Compile Include="Models\Domains\Student.cs" />
     <Compile Include="Models\Subject.cs" />
+    <Compile Include="Models\Wrappers\ConnectionSettingsWrapper.cs" />
     <Compile Include="Models\Wrappers\GroupWrapper.cs" />
     <Compile Include="Models\Wrappers\StudentWrapper.cs" />
     <Compile Include="Repository.cs" />
