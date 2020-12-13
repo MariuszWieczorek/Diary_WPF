@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Diagnostics;
 
 
 namespace Diary.ViewModels
@@ -19,7 +20,6 @@ namespace Diary.ViewModels
         public ICommand ConfirmCommand { get; set; }
 
         private ConnectionSettingsWrapper _connectionSettings;
-
         public ConnectionSettingsWrapper ConnectionSettings
         {
             get
@@ -68,7 +68,7 @@ namespace Diary.ViewModels
             if (!ConnectionSettings.IsValid)
             {
                 MessageBox.Show("Nie uzupełniłeś wszystkich wymaganych pól !");
-                // return false;
+                return false;
             }
 
             bool isConnectionOk = true;
@@ -100,8 +100,9 @@ namespace Diary.ViewModels
             if (TestSettings())
             {
                 SaveSettings();
-                
-                // System.Windows.Application.Current.Shutdown();
+                var exeLocation = System.Reflection.Assembly.GetExecutingAssembly().Location;
+                Process.Start(exeLocation);
+                Application.Current.Shutdown();
                 CloseWindow(obj as Window);
             }
 

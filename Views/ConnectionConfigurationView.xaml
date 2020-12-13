@@ -33,7 +33,7 @@
 
         <Label Grid.Row="1" Content="Adres Serwera" Margin="5"/>
         <TextBox 
-            Text ="{Binding ConnectionSettings.ServerAddress}"
+            Text ="{Binding ConnectionSettings.ServerAddress,ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}"
             Grid.Row="1"
             Grid.Column="1"
             Margin="5"/>

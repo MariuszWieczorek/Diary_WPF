@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+
 
 namespace Diary.Models.Wrappers
 {
@@ -54,6 +56,7 @@ namespace Diary.Models.Wrappers
                             }
                         }
                         break;
+
                     case nameof(LastName):
                         {
                             if (string.IsNullOrWhiteSpace(LastName))
