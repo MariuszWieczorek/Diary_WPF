@@ -39,7 +39,7 @@ namespace Diary
                     .AsQueryable();
 
                 if (groupId != 0)
-                    students = students.Where(x => x.GroupId == groupId);
+                    students = students.Where(x => x.GroupId == groupId).AsQueryable();
 
                 // w tym miejscu wykonamy kwerendę
                 // gdyby powyżej było ToList() zapytanie wywołało by się 2 razy

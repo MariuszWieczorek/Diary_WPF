@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Diagnostics;
-
+using System.Data;
 
 namespace Diary.ViewModels
 {
@@ -61,43 +61,23 @@ namespace Diary.ViewModels
             Settings.Default.Save();
         }
 
-        private bool TestSettings()
+        /// <summary>
+        /// Przycisk Zapisz
+        /// </summary>
+        /// <param name="obj"></param>
+        private void Confirm(object obj)
         {
-         
 
             if (!ConnectionSettings.IsValid)
             {
                 MessageBox.Show("Nie uzupełniłeś wszystkich wymaganych pól !");
-                return false;
+                return;
             }
 
-            bool isConnectionOk = true;
+        
+            string testConnectionString = DbHelper.ConnectionStringBuilder(ConnectionSettings.ServerAddress, ConnectionSettings.ServerName, ConnectionSettings.Database, ConnectionSettings.User, ConnectionSettings.Password);
 
-
-            string testConnectionString = DbHelper.ConnectionStringBuilder(ConnectionSettings.ServerAddress,ConnectionSettings.ServerName,ConnectionSettings.Database,ConnectionSettings.User,ConnectionSettings.Password);
-
-            using (var context = new ApplicationBbContext(testConnectionString))
-            {
-                try
-                {
-                    context.Groups.ToList();
-                }
-                catch (Exception e)
-                {
-
-                    MessageBox.Show(e.Message);
-                    isConnectionOk = false;
-                }
-                
-                
-                return isConnectionOk;
-            }
-
-        }
-
-        private void Confirm(object obj)
-        {
-            if (TestSettings())
+            if (DbHelper.ConnectionSettingsInfo(testConnectionString))
             {
                 SaveSettings();
                 var exeLocation = System.Reflection.Assembly.GetExecutingAssembly().Location;
@@ -105,12 +85,27 @@ namespace Diary.ViewModels
                 Application.Current.Shutdown();
                 CloseWindow(obj as Window);
             }
+            else
+            {
+                MessageBox.Show($@"Nie można uzyskać połączenia z użyciem connecion stringa: \n{testConnectionString}\nPopraw parametry i zatwierdź zmiany ponownie."); 
+            }
+        
 
         }
-
+        
+        /// <summary>
+        /// Przycisk Zamknij
+        /// </summary>
+        /// <param name="obj"></param>
         private void Close(object obj)
         {
-            CloseWindow(obj as Window);
+            if (!(String.IsNullOrWhiteSpace(ConnectionSettings.ServerAddress)
+                && String.IsNullOrWhiteSpace(ConnectionSettings.Database)
+                && String.IsNullOrWhiteSpace(ConnectionSettings.User)
+                && String.IsNullOrWhiteSpace(ConnectionSettings.Password)))
+                CloseWindow(obj as Window);
+            else
+                Application.Current.Shutdown();
         }
 
         private void CloseWindow(Window window)

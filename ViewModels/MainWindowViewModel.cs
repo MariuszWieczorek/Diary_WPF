@@ -82,69 +82,15 @@ namespace Diary.ViewModels
             }
         }
 
-
         public MainWindowViewModel()
         {
-
-            
-            
-
-            // zostanie utworzone pierwsze zapytanie i utworzone bazy
-            using ( var context = new ApplicationBbContext())
-            {
-                var students = context.Students.ToList();
-            }
-
             RefreshStudentsCommand = new RelayCommand(RefreshStudents);
             AddStudentsCommand = new RelayCommand(AddEditStudents);
             ConectionConfigurationCommand = new RelayCommand(ConectionConfiguration);
             EditStudentsCommand = new RelayCommand(AddEditStudents, CanEditDeleteStudents);
             DeleteStudentsCommand = new AsyncRelayCommand(DeleteStudents, CanEditDeleteStudents);
-
-            // throw new Exception("błędzik");
-
+            InitGroups();
             RefreshDiary();
-
-        }
-
-
-
-        private void PopulateStudents2()
-        {
-            Students = new ObservableCollection<StudentWrapper>
-            {
-            new StudentWrapper
-            {
-                Id = 1,
-                FirstName = "Jan",
-                LastName = "Kowalski",
-                Group = new GroupWrapper{Id = 1}
-            },
-
-            new StudentWrapper
-            {
-                Id = 2,
-                FirstName = "Jan",
-                LastName = "Nowak",
-                Group = new GroupWrapper{Id = 1}
-            },
-
-            new StudentWrapper
-            {
-                Id = 3,
-                FirstName = "Alfred",
-                LastName = "Kowalski",
-                Group = new GroupWrapper{Id = 1}
-            },
-
-             new StudentWrapper
-             {
-                 Id = 4,
-                 FirstName = "Joanna",
-                 LastName = "Bartkowiak",
-                 Group = new GroupWrapper { Id = 1 }
-             },
-            };
         }
 
         private void InitGroups()
@@ -162,7 +108,7 @@ namespace Diary.ViewModels
 
         private void RefreshDiary()
         {
-            InitGroups();
+           
             Students = new ObservableCollection<StudentWrapper>(_repository.GetStudents(SelectedGroupId));
 
         }
@@ -174,9 +120,7 @@ namespace Diary.ViewModels
             RefreshDiary();
         }
 
-    
-
- 
+     
         private void AddEditStudents(object obj)
         {
             // nie jest to dobre rozwiązanie
@@ -213,12 +157,15 @@ namespace Diary.ViewModels
                 return;
             }
 
-            // TODO : usuwanie z bazy
             _repository.DeleteStudent(SelectedStudent.Id);
 
             RefreshDiary();
         }
 
+        /// <summary>
+        /// Wywołanie okna konfiguracji połączenia
+        /// </summary>
+        /// <param name="obj"></param>
         private void ConectionConfiguration(object obj)
         {
             var connectionConfigurationWindow = new ConnectionConfigurationView();

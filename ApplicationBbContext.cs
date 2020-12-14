@@ -6,6 +6,7 @@ using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Windows;
+using Diary.Views;
 
 namespace Diary
 {
@@ -84,7 +85,7 @@ namespace Diary
 
         // ConnectionString "name=ApplicationBbContext"
 
-        private static string _emergencyConnectionString = "Server=127.0.0.1;Database=Diary;Uid=user1;Pwd=alamakota;";
+        private static string _connectionString2 = "Server=127.0.0.1;Database=Diary;Uid=user1;Pwd=alamakota;";
 
         
        private static string _connectionString = DbHelper.ConnectionStringBuilder(ServerAddress, ServerName, DataBase, User, Password);
@@ -93,6 +94,11 @@ namespace Diary
         public ApplicationBbContext() 
             : base(_connectionString)
         {
+            if (!DbHelper.ConnectionSettingsTest(_connectionString))
+            {
+                var connectionConfigurationWindow = new ConnectionConfigurationView();
+                connectionConfigurationWindow.ShowDialog();
+            }
         }
 
         public ApplicationBbContext(string connectionString)
