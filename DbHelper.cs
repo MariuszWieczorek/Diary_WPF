@@ -40,9 +40,30 @@ namespace Diary
                 }
                 catch (Exception)
                 {
-                    //MessageBox.Show(testConnectionString);
-                    return false;
+                    MessageBox.Show($"Nie można uzyskać połączenia z użyciem connecion stringa: \n{testConnectionString} \nPopraw parametry i zatwierdź zmiany ponownie.");
+                    return true;
                 }    
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// Do sprawdzania connection stringa zapisanego w ustawieniach użytkownika
+        /// </summary>
+        /// <returns></returns>
+        public static bool ConnectionSettingsTest()
+        {
+            using (var context = new ApplicationBbContext())
+            {
+                try
+                {
+                    context.Database.Connection.Open();
+                    context.Database.Connection.Close();
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
                 return true;
             }
         }
@@ -52,34 +73,22 @@ namespace Diary
         /// </summary>
         /// <param name="testConnectionString"></param>
         /// <returns></returns>        
-        public static bool ConnectionSettingsInfo(string testConnectionString)
+        public static void ConnectionSettingsInfo(ApplicationBbContext context)
         {
-            using (var context = new ApplicationBbContext(testConnectionString))
+
+            if (context.Database.Connection.State == ConnectionState.Open)
             {
-                try
-                {
-                    context.Database.Connection.Open();
-                    if (context.Database.Connection.State == ConnectionState.Open)
-                    {
-                        string connectionInfo = 
-                               "Konfiguracja połączenia SQL OK"
-                            + $"\nConnectionString: {testConnectionString}"
-                            + $"\nDataBase: { context.Database.Connection.Database}"
-                            + $"\nDataSource: { context.Database.Connection.DataSource}"
-                            + $"\nServerVersion: { context.Database.Connection.ServerVersion}"
-                            + $"\nTimeOut: { context.Database.Connection.ConnectionTimeout}";
+                string connectionInfo = 
+                        "Konfiguracja połączenia SQL OK"
+                    + $"\nConnectionString: {context.Database.Connection.ConnectionString}"
+                    + $"\nDataBase: { context.Database.Connection.Database}"
+                    + $"\nDataSource: { context.Database.Connection.DataSource}"
+                    + $"\nServerVersion: { context.Database.Connection.ServerVersion}"
+                    + $"\nTimeOut: { context.Database.Connection.ConnectionTimeout}";
 
-                            MessageBox.Show(connectionInfo);
-                    }
-                    context.Database.Connection.Close();
-                }
-                catch (Exception)
-                {
-                   return false;
-                }
-
-                return true;
+                    MessageBox.Show(connectionInfo);
             }
+
         }
     }
 }

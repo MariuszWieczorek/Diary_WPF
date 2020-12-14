@@ -89,13 +89,28 @@ namespace Diary.ViewModels
             ConectionConfigurationCommand = new RelayCommand(ConectionConfiguration);
             EditStudentsCommand = new RelayCommand(AddEditStudents, CanEditDeleteStudents);
             DeleteStudentsCommand = new AsyncRelayCommand(DeleteStudents, CanEditDeleteStudents);
+            
+
+            // Gdy test połączenie wypadnie negatywnie
+            // wywołane zostaje okienko konfiguracyjne połączenia SQL
+            // po zapisie ustawień w tym okienku zostaje wymuszony restart aplikacji
+            // po anulowaniu nastepuje zamknięcie aplikacji
+            if (!DbHelper.ConnectionSettingsTest())
+            {
+                var connectionConfigurationWindow = new ConnectionConfigurationView();
+                connectionConfigurationWindow.ShowDialog();
+            }
+
             InitGroups();
             RefreshDiary();
         }
 
+        /// <summary>
+        /// Pobiera słownik grup z bazy danych służący do filtrowania danych
+        /// Dodaje rekord o Id == 0, któy oznacza, że nie filtrujemy po grupie
+        /// </summary>
         private void InitGroups()
         {
-
             var groups = _repository.GetGroups();
             // wstawiamy grupę domyślną
             groups.Insert(0, new Group { Id = 0, Name = "Wszystkie" });
@@ -108,13 +123,10 @@ namespace Diary.ViewModels
 
         private void RefreshDiary()
         {
-           
             Students = new ObservableCollection<StudentWrapper>(_repository.GetStudents(SelectedGroupId));
-
         }
 
-
-  
+ 
         private void RefreshStudents(object obj)
         {
             RefreshDiary();

@@ -36,6 +36,8 @@
             Margin="5"/>
         <TextBox 
             Visibility="{Binding IsUpdate, Converter={StaticResource BooleanToVisibilityConverter}}"
+            IsReadOnly="true"
+            IsEnabled="false"
             Text ="{Binding Student.Id}"
             Grid.Column="1"
             Margin="5"/>

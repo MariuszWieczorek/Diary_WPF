@@ -3,7 +3,7 @@
 
     <Style TargetType="Button">
         <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="FontSize" Value="17"/>
+        <Setter Property="FontSize" Value="14"/>
     </Style>
     <Style TargetType="Button" x:Key="ButtonRefreshStyle">
         <Setter Property="FontWeight" Value="Bold"/>

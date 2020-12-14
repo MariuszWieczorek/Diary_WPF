@@ -70,14 +70,15 @@ namespace Diary.ViewModels
 
             if (!ConnectionSettings.IsValid)
             {
-                MessageBox.Show("Nie uzupełniłeś wszystkich wymaganych pól !");
+                MessageBox.Show("Nie uzupełniłeś wszystkich wymaganych pól do ustanowienia połączenia!");
                 return;
             }
 
-        
+            // zapisujemy ustawienia użytkownika dopiero wówczas
+            // gdy ConnectionString z nich sklejony działa poprawnie
+            // po zapisie restarturjmy aplikację
             string testConnectionString = DbHelper.ConnectionStringBuilder(ConnectionSettings.ServerAddress, ConnectionSettings.ServerName, ConnectionSettings.Database, ConnectionSettings.User, ConnectionSettings.Password);
-
-            if (DbHelper.ConnectionSettingsInfo(testConnectionString))
+            if (DbHelper.ConnectionSettingsTest(testConnectionString))
             {
                 SaveSettings();
                 var exeLocation = System.Reflection.Assembly.GetExecutingAssembly().Location;
@@ -85,12 +86,6 @@ namespace Diary.ViewModels
                 Application.Current.Shutdown();
                 CloseWindow(obj as Window);
             }
-            else
-            {
-                MessageBox.Show($@"Nie można uzyskać połączenia z użyciem connecion stringa: \n{testConnectionString}\nPopraw parametry i zatwierdź zmiany ponownie."); 
-            }
-        
-
         }
         
         /// <summary>

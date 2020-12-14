@@ -29,6 +29,7 @@ namespace Diary
 
         }
 
+        /*
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
@@ -52,12 +53,16 @@ namespace Diary
                 {
                     //initialize the main window, set it as the application main window
                     //and close the splash screen
-                    //var mainWindow = new MainWindow();
-                    //this.MainWindow = mainWindow;
-                   // mainWindow.Show();
+                    var mainWindow = new MainWindow();
+                    this.MainWindow = mainWindow;
+                    mainWindow.Show();
                     splashScreen.Close();
                 });
             });
+            
+
         }
+        */
+
     }
 }
