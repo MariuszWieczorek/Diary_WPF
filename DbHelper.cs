@@ -48,7 +48,7 @@ namespace Diary
         }
 
         /// <summary>
-        /// Informacje na temat połączenia SQL
+        /// Informacje na temat połączenia SQL'a
         /// </summary>
         /// <param name="testConnectionString"></param>
         /// <returns></returns>        
