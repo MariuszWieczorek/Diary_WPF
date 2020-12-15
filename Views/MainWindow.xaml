@@ -5,11 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Diary"
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"         
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="Dziennik Ucznia" Height="500" Width="1000">
 
-   
+    <!-- Bindowanie zdarzenie Loaded do właściwości w view modelu LoadedWindowCommand.-->
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -40,9 +49,11 @@
                 Content="Usuń" 
                 Height="30" 
                 Width="100" 
-                Margin="5" 
-            />
-            
+                Margin="5"/>
+
+
+
+
             <ComboBox
                 Height="30"
                 Width="150"
@@ -50,8 +61,16 @@
                 ItemsSource="{Binding Groups}"
                 SelectedValue="{Binding SelectedGroupId}"
                 DisplayMemberPath="Name"
-                SelectedValuePath="Id"
-            />
+                SelectedValuePath="Id">
+
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="LostFocus">
+                        <i:InvokeCommandAction Command="{Binding ComboBoxChanged}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+
+            </ComboBox>
+                
             
             <Button  
                 Command ="{Binding RefreshStudentsCommand}"

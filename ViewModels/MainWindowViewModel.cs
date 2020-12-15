@@ -27,6 +27,11 @@ namespace Diary.ViewModels
         public ICommand EditStudentsCommand { get; set; }
         public ICommand DeleteStudentsCommand { get; set; }
 
+        public ICommand LoadedWindowCommand { get; set; }
+
+        public ICommand ComboBoxChanged { get; set; }
+
+
         private StudentWrapper _selectedStudent;
         public StudentWrapper SelectedStudent
         {
@@ -89,7 +94,9 @@ namespace Diary.ViewModels
             ConectionConfigurationCommand = new RelayCommand(ConectionConfiguration);
             EditStudentsCommand = new RelayCommand(AddEditStudents, CanEditDeleteStudents);
             DeleteStudentsCommand = new AsyncRelayCommand(DeleteStudents, CanEditDeleteStudents);
-            
+            LoadedWindowCommand = new RelayCommand(LoadedWindow);
+            ComboBoxChanged = new RelayCommand(ComboBoxLostFocus);
+
 
             // Gdy test połączenie wypadnie negatywnie
             // wywołane zostaje okienko konfiguracyjne połączenia SQL
@@ -103,6 +110,16 @@ namespace Diary.ViewModels
 
             InitGroups();
             RefreshDiary();
+        }
+
+        private void ComboBoxLostFocus(object obj)
+        {
+            RefreshDiary();
+        }
+
+        private void LoadedWindow(object arg)
+        {
+            // MessageBox.Show("Loaded Window AAAAAAAAAAAAAAAAAAAAAAAAAAAA");
         }
 
         /// <summary>
